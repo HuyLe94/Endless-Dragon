@@ -14,9 +14,6 @@ public class Orbs : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(orb.type);
-        //Debug.Log("Added Hp");
-        waterEffect();
         if (gameObject.transform.position.x < -10 || gameObject.transform.position.x > 10 || gameObject.transform.position.y < -10)
             Destroy(gameObject);
     }
@@ -34,5 +31,14 @@ public class Orbs : MonoBehaviour
     void waterEffect()
     {
         Player.playerHP += 100;
+        if(Player.playerHP > Player.maxHP)
+        {
+            Player.playerHP = Player.maxHP;
+        }
+    }
+
+    void lightningEffect()
+    {
+
     }
 }
