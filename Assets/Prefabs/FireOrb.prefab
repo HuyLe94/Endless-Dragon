@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -8525621535658829462}
   m_Layer: 0
   m_Name: FireOrb
-  m_TagString: Untagged
+  m_TagString: Orb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,3 +147,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de1ecf73c7c44034d96117132a9b52f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
