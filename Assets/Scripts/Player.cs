@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(fakeFire());
+        //StartCoroutine(fakeFire());
         //midPoint = (topBorder.position.y + bottomBorder.position.y) / 2;
         loot = new OrbTypes[3];
     }
@@ -86,8 +86,12 @@ public class Player : MonoBehaviour
         }
         else if (collision.CompareTag("Orb"))
         {
-
-            if (loot[0] == null)
+            if (collision.GetComponent<OrbTypes>().type == OrbTypes.OrbType.FakeFire)
+            {
+                StartCoroutine(fakeFire());
+                collision.gameObject.SetActive(false);
+            }
+            else if (loot[0] == null)
             {
                 loot[0] = (collision.GetComponent<OrbTypes>());
                 collision.transform.SetParent(transform);
@@ -148,11 +152,14 @@ public class Player : MonoBehaviour
 
     IEnumerator fakeFire()
     {
-            while (true)
-            {
-                playerHP = Mathf.RoundToInt(playerHP - (playerHP * 0.01f));
-                yield return new WaitForSeconds(5);
-            }
+        int count = 5;
+        while (count > 0)
+        {
+            playerHP -= 2;
+            //playerHP = Mathf.RoundToInt(playerHP - (playerHP * 0.01f));
+            yield return new WaitForSeconds(1);
+            count--;
+         }
         //for (float i=0 * Time.deltaTime; i < 5; i+=1)
         //{
         //    playerHP = Mathf.RoundToInt(playerHP - (playerHP * 0.01f* Time.deltaTime));
