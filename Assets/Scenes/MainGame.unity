@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 322117730}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -350,9 +350,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
+  playerHP: 10000000
+  maxHP: 10000000
+  shield: 0
+  dotDuration: 5
   topBorder: {fileID: 1165408637}
   bottomBorder: {fileID: 889854338}
-  fakeLighting: 0
+  loot: []
+  lightning: 1
+  water: 0
+  fire: 0
+  stone: 0
+  FakeLightning: 0
+  FakeFire: 0
+  FakeStone: 0
+  FakeWater: 0
 --- !u!50 &601482049
 Rigidbody2D:
   serializedVersion: 4

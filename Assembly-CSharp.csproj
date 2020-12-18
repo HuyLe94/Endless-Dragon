@@ -62,7 +62,6 @@
     <Compile Include="Assets\Scripts\OrbTypes.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\AutoDestroy.cs" />
-    <Compile Include="Assets\Scripts\TestArray.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

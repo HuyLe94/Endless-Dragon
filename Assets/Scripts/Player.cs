@@ -9,18 +9,29 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     private Vector2 mousePosition;
     public float moveSpeed = 0.1f;
-    public static int playerHP = 100;
-    public static int maxHP = 100;
+    public int playerHP = 100;
+    public int maxHP = 100;
+    public int shield = 0;
+    public float dotDuration = 5;
     public Transform topBorder;
     public Transform bottomBorder;
-    public bool fakeLighting = false;
     private Vector2 inversePos;
     private float midPoint;
-    private OrbTypes[] loot;
+    public OrbTypes[] loot;
+    public bool lightning = true;
+    public bool water = false;
+    public bool fire = false;
+    public bool stone = false;
+    public bool FakeLightning = false;
+    public bool FakeFire = false;
+    public bool FakeStone = false;
+    public bool FakeWater= false;
+
 
     void Start()
     {
-        midPoint = (topBorder.position.y + bottomBorder.position.y) / 2;
+        StartCoroutine(fakeFire());
+        //midPoint = (topBorder.position.y + bottomBorder.position.y) / 2;
         loot = new OrbTypes[3];
     }
 
@@ -29,7 +40,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            if (fakeLighting == false)
+            if (FakeLightning == false)
             {
                 FollowMouse();
             }
@@ -67,56 +78,86 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Bullet"))
         {
-            //Destroy(collision.transform.parent.gameObject);
+            if( lightning == true)
+            {
+                lightningEffect(collision);
+            }
             Destroy(collision.gameObject);
         }
         else if (collision.CompareTag("Orb"))
         {
+
             if (loot[0] == null)
             {
-                Debug.Log("1st slot");
-                loot[0] = collision.GetComponent<OrbTypes>();
-                Destroy(collision.gameObject);
-
+                loot[0] = (collision.GetComponent<OrbTypes>());
+                collision.transform.SetParent(transform);
+                collision.gameObject.SetActive(false);
             }
-            else if(loot[1].type == 0)
+            else if (loot[0] != null && loot[1] == null && loot[0].type == collision.GetComponent<OrbTypes>().type)
             {
-                Debug.Log("2nd slot");
                 loot[1] = collision.GetComponent<OrbTypes>();
-                Destroy(collision.gameObject);
+                collision.transform.SetParent(transform);
+                collision.gameObject.SetActive(false);
             }
-            else if(loot[2].type == 0)
+            else if (loot[0] != null && loot[0].type != collision.GetComponent<OrbTypes>().type)
             {
-                Debug.Log("3rd slot");
-                loot[2] = collision.GetComponent<OrbTypes>();
-                Destroy(collision.gameObject);
+                Array.Clear(loot, 0, loot.Length);
+                foreach(Transform child in gameObject.transform)
+                {
+                    Destroy(child.gameObject);
+                }
+                loot[0] = collision.GetComponent<OrbTypes>();
+                collision.transform.SetParent(transform);
+                collision.gameObject.SetActive(false);
             }
-            //for (int i = 0; i < loot.Length; i++)
-            //{
-            //    if (i == 0) //&& loot[i] == null)
-            //    {
-            //        loot[i] = collision.GetComponent<OrbTypes>();
-            //        Destroy(collision.gameObject);
-            //    }
-            //    else
-            //    {
-            //        if (loot[i] == null && collision.GetComponent<OrbTypes>().type == loot[i - 1].type)
-            //        {
-            //            loot[i] = collision.GetComponent<OrbTypes>();
 
-            //            //var a = loot[i].type;
-            //            //Debug.Log(loot[i].type);
-            //            Destroy(collision.gameObject);
-            //        }
-            //else
-            //{
-            //    Array.Clear(loot, 0, loot.Length);
-            //    loot[0] = collision.GetComponent<OrbTypes>();
-            //}
-
-            //    }
-            //}
-
+            else if ((loot[0] != null) && (loot[1] != null) && (loot[2] == null) && (loot[0].type == collision.GetComponent<OrbTypes>().type))
+            {
+                loot[2] = collision.GetComponent<OrbTypes>();
+                collision.transform.SetParent(transform);
+                collision.gameObject.SetActive(false);
+            }
         }
+    }
+
+    void lightningEffect(Collider2D a)
+    {
+        Destroy(a.transform.parent.gameObject);
+    }
+    void waterEffect()
+    {
+        playerHP += 100;
+        if (playerHP > maxHP)
+        {
+            playerHP = maxHP;
+        }
+    }
+    void fireEffect()
+    {
+        var a = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach(GameObject b in a)
+        {
+            Destroy(b);
+        }
+    }
+
+    void stoneEffect()
+    {
+        shield += 30;
+    }
+
+    IEnumerator fakeFire()
+    {
+            while (true)
+            {
+                playerHP = Mathf.RoundToInt(playerHP - (playerHP * 0.01f));
+                yield return new WaitForSeconds(5);
+            }
+        //for (float i=0 * Time.deltaTime; i < 5; i+=1)
+        //{
+        //    playerHP = Mathf.RoundToInt(playerHP - (playerHP * 0.01f* Time.deltaTime));
+        //    Debug.Log(playerHP);
+        //    Debug.Log("Here");
+        //}
     }
 }

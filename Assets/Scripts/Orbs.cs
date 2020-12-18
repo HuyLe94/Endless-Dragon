@@ -8,6 +8,7 @@ public class Orbs : MonoBehaviour
     private OrbTypes orb;
     void Start()
     {
+        
         orb = gameObject.GetComponent<OrbTypes>();
     }
 
@@ -26,19 +27,5 @@ public class Orbs : MonoBehaviour
             Vector2 velocity = new Vector2(-(gameObject.GetComponent<Rigidbody2D>().velocity.x), gameObject.GetComponent<Rigidbody2D>().velocity.y) ;
             gameObject.GetComponent<Rigidbody2D>().velocity = velocity;
         }
-    }
-
-    void waterEffect()
-    {
-        Player.playerHP += 100;
-        if(Player.playerHP > Player.maxHP)
-        {
-            Player.playerHP = Player.maxHP;
-        }
-    }
-
-    void lightningEffect()
-    {
-
     }
 }
