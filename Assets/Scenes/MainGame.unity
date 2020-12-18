@@ -349,10 +349,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45279ad11c213b5459606ffa7a22c343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
+  moveSpeed: 0.1
   playerHP: 10000000
   maxHP: 10000000
   shield: 0
+  maxShield: 100
   dotDuration: 5
   topBorder: {fileID: 1165408637}
   bottomBorder: {fileID: 889854338}
@@ -365,6 +366,7 @@ MonoBehaviour:
   FakeFire: 0
   FakeStone: 0
   FakeWater: 0
+  moveable: 1
 --- !u!50 &601482049
 Rigidbody2D:
   serializedVersion: 4

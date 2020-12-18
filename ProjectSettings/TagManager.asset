@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Orb
   - Enemy
+  - FakeOrb
   layers:
   - Default
   - TransparentFX

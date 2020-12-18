@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public int playerHP = 100;
     public int maxHP = 100;
     public int shield = 0;
+    public int maxShield = 100;
     public float dotDuration = 5;
     public Transform topBorder;
     public Transform bottomBorder;
@@ -26,7 +27,7 @@ public class Player : MonoBehaviour
     public bool FakeFire = false;
     public bool FakeStone = false;
     public bool FakeWater= false;
-
+    public bool moveable = true;
 
     void Start()
     {
@@ -40,14 +41,16 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            if (FakeLightning == false)
+            if (FakeStone == false && moveable == true)
             {
                 FollowMouse();
             }
-            else
+            else if (FakeStone == true && moveable == true)
             {
                 ReverseMouse();
             }
+            else 
+                return;
         }
         if (playerHP <= 0)
         {
@@ -78,9 +81,9 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Bullet"))
         {
-            if( lightning == true)
+            if (lightning == true)
             {
-                lightningEffect(collision);
+                Destroy(collision.transform.parent.gameObject);
             }
             Destroy(collision.gameObject);
         }
@@ -88,7 +91,6 @@ public class Player : MonoBehaviour
         {
             if (collision.GetComponent<OrbTypes>().type == OrbTypes.OrbType.FakeFire)
             {
-                StartCoroutine(fakeFire());
                 collision.gameObject.SetActive(false);
             }
             else if (loot[0] == null)
@@ -106,7 +108,7 @@ public class Player : MonoBehaviour
             else if (loot[0] != null && loot[0].type != collision.GetComponent<OrbTypes>().type)
             {
                 Array.Clear(loot, 0, loot.Length);
-                foreach(Transform child in gameObject.transform)
+                foreach (Transform child in gameObject.transform)
                 {
                     Destroy(child.gameObject);
                 }
@@ -120,13 +122,25 @@ public class Player : MonoBehaviour
                 loot[2] = collision.GetComponent<OrbTypes>();
                 collision.transform.SetParent(transform);
                 collision.gameObject.SetActive(false);
+                switchEffect(collision.GetComponent<OrbTypes>().type);
+                Array.Clear(loot, 0, loot.Length);
             }
+        }
+        else if (collision.CompareTag("FakeOrb"))
+        {
+            switchEffect(collision.GetComponent<OrbTypes>().type);
+            Destroy(collision);
+            Array.Clear(loot, 0, loot.Length);
         }
     }
 
-    void lightningEffect(Collider2D a)
+    IEnumerator lightningEffect()
     {
-        Destroy(a.transform.parent.gameObject);
+        while (lightning == true)
+        {
+            yield return new WaitForSeconds(5);
+        }
+        lightning = false;
     }
     void waterEffect()
     {
@@ -148,23 +162,115 @@ public class Player : MonoBehaviour
     void stoneEffect()
     {
         shield += 30;
+        if (shield > maxShield)
+        {
+            shield = maxShield;
+        }
     }
 
     IEnumerator fakeFire()
     {
-        int count = 5;
-        while (count > 0)
+        while (FakeFire == true)
         {
-            playerHP -= 2;
-            //playerHP = Mathf.RoundToInt(playerHP - (playerHP * 0.01f));
-            yield return new WaitForSeconds(1);
-            count--;
-         }
-        //for (float i=0 * Time.deltaTime; i < 5; i+=1)
-        //{
-        //    playerHP = Mathf.RoundToInt(playerHP - (playerHP * 0.01f* Time.deltaTime));
-        //    Debug.Log(playerHP);
-        //    Debug.Log("Here");
-        //}
+
+            for (int i = 0; i < 5 ; i++)
+            {
+                playerHP -= 2;
+                //playerHP = Mathf.RoundToInt(playerHP - (playerHP * 0.01f));
+                yield return new WaitForSeconds(1);
+            }
+        }
+        FakeFire = false;
+    }
+
+    IEnumerator fakeWater()
+    {
+        while(FakeWater == true)
+        {
+            this.moveSpeed = 0.05f;
+            yield return new WaitForSeconds(5);
+        }
+        FakeWater = false;
+    }
+
+    IEnumerator fakeEarth()
+    {
+        FakeStone = true;
+        yield return new WaitForSeconds(5);
+        FakeStone = false;
+    }
+
+    IEnumerator fakeLightning()
+    {
+        while (FakeLightning == true)
+        {
+            moveable = false;
+            yield return new WaitForSeconds(5);
+        }
+        moveable = true;
+        FakeLightning = false;
+    }
+
+    void switchEffect(OrbTypes.OrbType a)
+    {
+        switch(a)
+        {
+            case OrbTypes.OrbType.FakeEarth:
+                {
+                    Debug.Log("Here, faker earth");
+                    FakeStone = true;
+                    StartCoroutine(fakeEarth());
+                    break;
+                }
+            case OrbTypes.OrbType.FakeWater:
+                {
+                    Debug.Log("Here FakeWater");
+                    FakeWater = true;
+                    StartCoroutine(fakeWater());
+                    break;
+                }
+            case OrbTypes.OrbType.FakeFire:
+                {
+                    Debug.Log("Here FakeFire");
+                    FakeFire = true;
+                    StartCoroutine(fakeFire());
+                    break;
+                }
+            case OrbTypes.OrbType.FakeLightning:
+                {
+                    Debug.Log("Here FakeLightnin");
+                    FakeLightning = true;
+                    StartCoroutine(fakeLightning());
+                    break;
+                }
+            case OrbTypes.OrbType.Earth:
+                {
+                    Debug.Log("Here  earth");
+                    stone = true;
+                    stoneEffect();
+                    break;
+                }
+            case OrbTypes.OrbType.Fire:
+                {
+                    Debug.Log("Here fire");
+                    fire = true;
+                    fireEffect();
+                    break;
+                }
+            case OrbTypes.OrbType.Water:
+                {
+                    Debug.Log("Here water");
+                    water = true;
+                    waterEffect();
+                    break;
+                }
+            case OrbTypes.OrbType.Lightning:
+                {
+                    Debug.Log("Here lightning");
+                    lightning= true;
+                    lightningEffect();
+                    break;
+                }
+        }
     }
 }

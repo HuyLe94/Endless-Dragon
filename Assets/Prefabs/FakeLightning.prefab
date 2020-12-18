@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4622201402340640734}
   m_Layer: 0
   m_Name: FakeLightning
-  m_TagString: Orb
+  m_TagString: FakeOrb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

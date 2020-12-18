@@ -8,5 +8,6 @@ public class OrbTypes : MonoBehaviour
     public enum OrbType { Fire, Water, Lightning, Earth, FakeFire, FakeLightning, FakeWater, FakeEarth };
     public OrbType type;
 
+
 }
 
