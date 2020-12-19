@@ -59,10 +59,11 @@
     <Compile Include="Assets\Scripts\Orbs.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\OrbSpawn.cs" />
+    <Compile Include="Assets\Scripts\Combat.cs" />
     <Compile Include="Assets\Scripts\OrbTypes.cs" />
     <Compile Include="Assets\Scripts\Enemy.cs" />
     <Compile Include="Assets\Scripts\AutoDestroy.cs" />
-    <Compile Include="Assets\Scripts\Combat.cs" />
+    <Compile Include="Assets\Scripts\Bullets.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

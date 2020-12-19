@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
     public float dotDuration = 5;
     public Transform topBorder;
     public Transform bottomBorder;
+    public GameObject bulletPrefab;
+    public float atkSpeed = 5f;
+    private float timer = 0;
+    public bool allowAtk = true;
     private Vector2 inversePos;
     private float midPoint;
     public OrbTypes[] loot;
@@ -37,6 +41,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if(allowAtk == true)
+        //{
+        //    float rate = 1 / atkSpeed;
+        //    timer += 0.1f * Time.deltaTime;
+        //    if (timer == rate)
+        //    {
+        //        attack2();
+        //        timer = 0f;
+        //    }
+        //}
+        StartCoroutine(attack3());
         if (Input.GetMouseButton(0))
         {
             if (FakeStone == false && moveable == true)
@@ -198,8 +213,10 @@ public class Player : MonoBehaviour
     {
         FakeLightning = true;
         moveable = false;
+        allowAtk = false;
         yield return new WaitForSeconds(5);
         moveable = true;
+        allowAtk = true;
         FakeLightning = false;
 
     }
@@ -257,6 +274,31 @@ public class Player : MonoBehaviour
                     moveable = true;
                     break;
                 }
+        }
+    }
+    //IEnumerator attack()
+    //{
+    //    while(allowAtk == true)
+    //    {
+    //        Debug.Log("Atk");
+    //        Instantiate(bulletPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
+    //        yield return new WaitForSeconds(1 / atkSpeed);
+    //    }
+        
+        
+    //    Debug.Log("stop");
+    //}
+
+    //void attack2()
+    //{
+    //    Instantiate(bulletPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
+    //}
+    IEnumerator attack3()
+    {
+        for(int i = 0; i<atkSpeed;i++)
+        {
+            Instantiate(bulletPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
+            yield return new WaitForSeconds(3);
         }
     }
 }
