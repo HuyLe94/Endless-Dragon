@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public Transform bottomBorder;
     public GameObject bulletPrefab;
     public float atkSpeed = 5f;
-    private float timer = 0;
+    private float atkRate;
     public bool allowAtk = true;
     private Vector2 inversePos;
     private float midPoint;
@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     public bool FakeLightning = false;
     public bool FakeFire = false;
     public bool FakeStone = false;
-    public bool FakeWater= false;
+    public bool FakeWater = false;
     public bool moveable = true;
     private Combat combat;
 
@@ -36,22 +36,14 @@ public class Player : MonoBehaviour
         midPoint = (topBorder.position.y + bottomBorder.position.y) / 2;
         combat = new Combat();
         loot = new OrbTypes[3];
+        atkRate = 1 / atkSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if(allowAtk == true)
-        //{
-        //    float rate = 1 / atkSpeed;
-        //    timer += 0.1f * Time.deltaTime;
-        //    if (timer == rate)
-        //    {
-        //        attack2();
-        //        timer = 0f;
-        //    }
-        //}
-        StartCoroutine(attack3());
+
+        attack();
         if (Input.GetMouseButton(0))
         {
             if (FakeStone == false && moveable == true)
@@ -166,7 +158,7 @@ public class Player : MonoBehaviour
     void fireEffect()
     {
         var a = GameObject.FindGameObjectsWithTag("Enemy");
-        foreach(GameObject b in a)
+        foreach (GameObject b in a)
         {
             Destroy(b);
         }
@@ -184,22 +176,22 @@ public class Player : MonoBehaviour
     IEnumerator fakeFire()
     {
         FakeFire = true;
-        for (int i = 0; i < 5 ; i++)
-            {
-                combat.playerHP = combat.playerHP - Mathf.RoundToInt((combat.playerHP * 0.02f));
-                //playerHP = Mathf.RoundToInt(playerHP - (playerHP * 0.01f));
-                yield return new WaitForSeconds(1);
-            }
+        for (int i = 0; i < 5; i++)
+        {
+            combat.playerHP = combat.playerHP - Mathf.RoundToInt((combat.playerHP * 0.02f));
+            //playerHP = Mathf.RoundToInt(playerHP - (playerHP * 0.01f));
+            yield return new WaitForSeconds(1);
+        }
         FakeFire = false;
     }
 
     IEnumerator fakeWater()
     {
-            FakeWater = true;
-            moveSpeed = 0.05f;
-            yield return new WaitForSeconds(5);
-            moveSpeed = 0.1f;
-            FakeWater = false;
+        FakeWater = true;
+        moveSpeed = 0.05f;
+        yield return new WaitForSeconds(5);
+        moveSpeed = 0.1f;
+        FakeWater = false;
     }
 
     IEnumerator fakeEarth()
@@ -223,7 +215,7 @@ public class Player : MonoBehaviour
 
     void switchEffect(OrbTypes.OrbType a)
     {
-        switch(a)
+        switch (a)
         {
             case OrbTypes.OrbType.FakeEarth:
                 {
@@ -268,7 +260,7 @@ public class Player : MonoBehaviour
                 }
             case OrbTypes.OrbType.Lightning:
                 {
-                    lightning= true;
+                    lightning = true;
                     lightningEffect();
                     lightning = false;
                     moveable = true;
@@ -276,29 +268,17 @@ public class Player : MonoBehaviour
                 }
         }
     }
-    //IEnumerator attack()
-    //{
-    //    while(allowAtk == true)
-    //    {
-    //        Debug.Log("Atk");
-    //        Instantiate(bulletPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
-    //        yield return new WaitForSeconds(1 / atkSpeed);
-    //    }
-        
-        
-    //    Debug.Log("stop");
-    //}
 
-    //void attack2()
-    //{
-    //    Instantiate(bulletPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
-    //}
-    IEnumerator attack3()
+    void attack()
     {
-        for(int i = 0; i<atkSpeed;i++)
+        if (Time.time >= atkRate && allowAtk == true)
         {
             Instantiate(bulletPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
-            yield return new WaitForSeconds(3);
+            atkRate = atkRate + (1 / atkSpeed);
+        }
+        else
+        {
+            return;
         }
     }
 }

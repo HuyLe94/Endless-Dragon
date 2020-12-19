@@ -180,7 +180,7 @@ MonoBehaviour:
   m_MinSize: {x: 906, y: 592}
   m_MaxSize: {x: 22001, y: 18042}
   vertical: 0
-  controlID: 148
+  controlID: 153
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -332,7 +332,7 @@ MonoBehaviour:
   m_MinSize: {x: 631, y: 592}
   m_MaxSize: {x: 18001, y: 18042}
   vertical: 1
-  controlID: 46
+  controlID: 154
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_MinSize: {x: 631, y: 471}
   m_MaxSize: {x: 18001, y: 14021}
   vertical: 0
-  controlID: 102
+  controlID: 155
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 15500
+  m_LastSelectedObjectID: 15432
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -606,22 +606,22 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000d44900006e3c00007e3c0000d23c0000d63c0000de3c0000703c0000b63d0000343d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Player
-      m_OriginalName: Player
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 12176
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 4}
     m_CreateAssetUtility:
@@ -701,8 +701,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 8c3c0000
-      m_LastClickedID: 15500
+      m_SelectedIDs: 483c0000
+      m_LastClickedID: 15432
       m_ExpandedIDs: 5afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0

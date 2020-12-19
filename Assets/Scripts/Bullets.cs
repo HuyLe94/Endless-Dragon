@@ -13,6 +13,6 @@ public class Bullets : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(0f, 1f, 0f) * Time.deltaTime;
+        transform.position += new Vector3(0f, 10f, 0f) * Time.deltaTime;
     }
 }
