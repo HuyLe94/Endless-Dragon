@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 0), 1 * Time.deltaTime);
         //moveTarget = GameObject.Find("AI-Target").;
         //movePos = a.posGen();
         //Debug.Log(moveTarget);
@@ -30,8 +31,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //fire();
-        //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        fire();
+        //transform.position = Vector2.MoveTowards(transform.position, player.transform.position, 1 * Time.deltaTime);
         
     }
 

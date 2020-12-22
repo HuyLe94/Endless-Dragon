@@ -6,38 +6,80 @@ public class EnemySpawn : MonoBehaviour
 {
     public Transform Spawner;
     public GameObject[] Mobs;
+    int i = 0;
+    //int x = 0;
     [SerializeField]
-    private Vector2[] pos;
+    private Vector3[] pos;
     public float speed;
+    public float timebtwSpawn;
+    //private float startingspawntime;
+    //private bool reachTarget = false;
+    private GameObject[] a;
+    [SerializeField]
+    private int mobPerWave = 10;
     // Start is called before the first frame update
     void Start()
     {
-        spawn();
+        a = new GameObject[mobPerWave];
+        StartCoroutine(spawn());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        foreach (GameObject b in a)
+        {
+            
+            
+                move(b, 0);
+            if (reachTarget(b, pos[i]) == true)
+            {
+                i++;
+            }
+
+
+            //Debug.Log(i);
+        }
     }
     public void newPos()
     {
-        pos = new Vector2[10];
+        pos = new Vector3[10];
         for(int i = 0;i< pos.Length;i++)
         {
-            pos[i] = new Vector2(Random.Range(-5f,5f), Random.Range(0.5f, 6f));
+            pos[i] = new Vector3(Mathf.Round(Random.Range(-5f,5f)), Mathf.Round(Random.Range(0.5f, 6f)),0);
         }
     }
-    void spawn()
+    IEnumerator spawn()
     {
         newPos();
-        //Debug.Log(pos);
         int i = Random.Range(0, Mobs.Length);
-        GameObject a = Instantiate(Mobs[i], transform.position,Quaternion.identity);
-        foreach(Vector2 c in pos)
+        for(int x = 0;x< mobPerWave;x++)
         {
-            a.transform.position = Vector2.MoveTowards(a.transform.position, c, speed*Time.deltaTime);
+                a[x] = Instantiate(Mobs[i], transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(timebtwSpawn);
         }
-        Debug.Log(a.transform.position);
+    }
+
+    void move(GameObject a, int indexOfPos)
+    {
+        if(a!= null)
+        {
+            a.transform.position = Vector3.MoveTowards(a.transform.position, pos[indexOfPos], speed * Time.deltaTime);
+        }
+    }
+
+    bool reachTarget(GameObject b, Vector3 location)
+    {
+        if (Mathf.Abs(Vector3.Distance(b.transform.position, location)) < 0.01f)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
+
+
+    //a.transform.position = Vector3.MoveTowards(a.transform.position, pos[indexOfPos], speed * Time.deltaTime);
