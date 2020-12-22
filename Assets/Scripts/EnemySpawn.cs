@@ -9,7 +9,8 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField]
     public Vector3[] pos;
     public float speed;
-    public float timebtwSpawn;
+    public float timebtwSpawn = 1;
+    public bool spawnAllow = true;
     //private float startingspawntime;
     private GameObject[] a;
     [SerializeField]
@@ -18,7 +19,7 @@ public class EnemySpawn : MonoBehaviour
     void Start()
     {
         a = new GameObject[mobPerWave];
-        StartCoroutine(spawn());
+        StartCoroutine(Spawn());
     }
 
     // Update is called once per frame
@@ -41,13 +42,19 @@ public class EnemySpawn : MonoBehaviour
             pos[i] = new Vector3(Mathf.Round(Random.Range(-5f,5f)), Mathf.Round(Random.Range(0.5f, 6f)),0);
         }
     }
-    IEnumerator spawn()
+    IEnumerator Spawn()
     {
-        newPos();
-        int i = Random.Range(0, Mobs.Length);
-        for(int x = 0;x< mobPerWave;x++)
+        
+        while(spawnAllow == true)
         {
+            int i = Random.Range(0, Mobs.Length);
+            newPos();
+            for (int x = 0; x < mobPerWave; x++)
+            {
                 a[x] = Instantiate(Mobs[i], transform.position, Quaternion.identity);
+                yield return new WaitForSeconds(1);
+            }
+            i = Random.Range(0, Mobs.Length);
             yield return new WaitForSeconds(timebtwSpawn);
         }
     }
