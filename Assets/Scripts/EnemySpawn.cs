@@ -6,14 +6,11 @@ public class EnemySpawn : MonoBehaviour
 {
     public Transform Spawner;
     public GameObject[] Mobs;
-    int i = 0;
-    //int x = 0;
     [SerializeField]
-    private Vector3[] pos;
+    public Vector3[] pos;
     public float speed;
     public float timebtwSpawn;
     //private float startingspawntime;
-    //private bool reachTarget = false;
     private GameObject[] a;
     [SerializeField]
     private int mobPerWave = 10;
@@ -27,19 +24,14 @@ public class EnemySpawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (GameObject b in a)
-        {
+        //for(int t = 0; t< a.Length;t++)
+        //{
+        //    for(int x = 0; x< pos.Length;x++)
+        //    {
+        //        move(a[t], pos[t]);
+        //    }
             
-            
-                move(b, 0);
-            if (reachTarget(b, pos[i]) == true)
-            {
-                i++;
-            }
-
-
-            //Debug.Log(i);
-        }
+        //}
     }
     public void newPos()
     {
@@ -60,25 +52,26 @@ public class EnemySpawn : MonoBehaviour
         }
     }
 
-    void move(GameObject a, int indexOfPos)
+    public void move(GameObject a, Vector3 i)
     {
-        if(a!= null)
+        if(a!=null)
         {
-            a.transform.position = Vector3.MoveTowards(a.transform.position, pos[indexOfPos], speed * Time.deltaTime);
-        }
+            a.transform.position = Vector3.MoveTowards(a.transform.position, i, speed * Time.deltaTime);
+        }   
     }
 
-    bool reachTarget(GameObject b, Vector3 location)
-    {
-        if (Mathf.Abs(Vector3.Distance(b.transform.position, location)) < 0.01f)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    //bool reachTarget(Vector3 current, Vector3 finalPos)
+    //{
+        
+    //    if (Mathf.Abs(Vector3.Distance(current, finalPos)) < 0.01f)
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
 }
 
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4210921361449731000}
   - component: {fileID: 3755929377703522500}
   - component: {fileID: 4334265917322768092}
+  - component: {fileID: 8166838953783833935}
   m_Layer: 0
   m_Name: Mob7
   m_TagString: Untagged
@@ -121,3 +122,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8166838953783833935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877657783273138758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a66719877429c84d9657899f502475d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

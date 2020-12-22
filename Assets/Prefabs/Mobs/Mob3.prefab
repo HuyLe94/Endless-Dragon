@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3533576879460120550}
   - component: {fileID: 1464545015824064480}
   - component: {fileID: 5692016644243110660}
+  - component: {fileID: -5072796481902784936}
   m_Layer: 0
   m_Name: Mob3
   m_TagString: Untagged
@@ -121,3 +122,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-5072796481902784936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724033367633342026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a66719877429c84d9657899f502475d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
