@@ -9,7 +9,6 @@ public class Enemy : MonoBehaviour
     public float fireRate = 5;
     public float timer = 0;
     private GameObject target;
-    public int enemyHP = 100;
     [SerializeField]
     //private Vector2[][] moveTarget;
     private Vector2[] movePos;
@@ -80,17 +79,5 @@ public class Enemy : MonoBehaviour
     //    //}
 
     //}
-
-    private void OnTriggerEnter2D(Collider2D hit)
-    {
-        if(hit.CompareTag("PlayerBullet"))
-        {
-            enemyHP -= 5;
-        }
-        if(enemyHP == 0)
-        {
-            Destroy(gameObject);
-        }
-    }
 
 }
