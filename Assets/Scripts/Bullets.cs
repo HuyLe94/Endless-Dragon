@@ -14,7 +14,7 @@ public class Bullets : MonoBehaviour
     void Update()
     {
         transform.position += new Vector3(0f, 10f, 0f) * Time.deltaTime;
-        if(transform.position.x< -4 || transform.position.x > 4 ||  transform.position.y > 10)
+        if(transform.position.x< -10 || transform.position.x > 10 ||  transform.position.y > 6.5)
         {
             Destroy(gameObject);
         }

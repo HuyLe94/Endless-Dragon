@@ -7,6 +7,12 @@ using System;
 public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
+    public int testINT = 0;
+    public int playerDmg = 10;
+    public int playerHP = 100;
+    public int maxHP = 100;
+    public int shield = 0;
+    public int maxShield = 30;
     private Vector2 mousePosition;
     public float moveSpeed = 0.1f;
     public float dotDuration = 5;
@@ -58,7 +64,7 @@ public class Player : MonoBehaviour
                 return;
             }
         }
-        if (combat.playerHP <= 0)
+        if (playerHP <= 0)
         {
             Destroy(gameObject);
             SceneManager.LoadScene("GameOver");
@@ -86,7 +92,7 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Bullet"))
         {
-            combat.takeDmg(combat.playerHP, combat.enemyDmg, combat.shield);
+            combat.takeDmg(ref playerHP, ref collision.transform.parent.GetComponent<Enemy>().enemyDmg, ref shield);
             if (lightning == true)
             {
                 Destroy(collision.transform.parent.gameObject);
@@ -148,10 +154,10 @@ public class Player : MonoBehaviour
     }
     void waterEffect()
     {
-        combat.playerHP += 100;
-        if (combat.playerHP > combat.maxHP)
+        playerHP += 100;
+        if (playerHP > maxHP)
         {
-            combat.playerHP = combat.maxHP;
+            playerHP = maxHP;
         }
     }
     void fireEffect()
@@ -165,10 +171,10 @@ public class Player : MonoBehaviour
 
     void stoneEffect()
     {
-        combat.shield += 30;
-        if (combat.shield > combat.maxShield)
+        shield += 30;
+        if (shield > maxShield)
         {
-            combat.shield = combat.maxShield;
+            shield = maxShield;
         }
     }
 
@@ -177,7 +183,7 @@ public class Player : MonoBehaviour
         FakeFire = true;
         for (int i = 0; i < 5; i++)
         {
-            combat.playerHP = combat.playerHP - Mathf.RoundToInt((combat.playerHP * 0.02f));
+            playerHP = playerHP - Mathf.RoundToInt((playerHP * 0.02f));
             //playerHP = Mathf.RoundToInt(playerHP - (playerHP * 0.01f));
             yield return new WaitForSeconds(1);
         }
@@ -272,7 +278,7 @@ public class Player : MonoBehaviour
     {
         if (Time.time >= atkRate && allowAtk == true)
         {
-            Instantiate(bulletPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);
+            Instantiate(bulletPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);//.transform.SetParent(gameObject.transform);
             atkRate = atkRate + (1 / atkSpeed);
         }
         else
@@ -281,4 +287,5 @@ public class Player : MonoBehaviour
         }
         atkRate = atkRate + (1 / atkSpeed);
     }
+
 }

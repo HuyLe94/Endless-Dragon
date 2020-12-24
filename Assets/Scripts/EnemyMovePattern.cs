@@ -16,7 +16,6 @@ public class EnemyMovePattern : MonoBehaviour
         for(int x = 0; x<ownPattern.Length;x++)
         {
             ownPattern[x] = spawner.pos[x];
-            Debug.Log("Copied");
         }
     }
 
