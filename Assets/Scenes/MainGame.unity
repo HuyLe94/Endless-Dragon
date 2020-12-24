@@ -165,6 +165,7 @@ MonoBehaviour:
   pos: []
   speed: 1
   timebtwSpawn: 2
+  spawnAllow: 1
   mobPerWave: 10
 --- !u!4 &10535747
 Transform:
@@ -192,13 +193,14 @@ GameObject:
   - component: {fileID: 322117728}
   - component: {fileID: 322117727}
   - component: {fileID: 322117730}
+  - component: {fileID: 322117731}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &322117727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +216,7 @@ MonoBehaviour:
   bullet: {fileID: 1563364925}
   fireRate: 1
   timer: 0
+  enemyHP: 100
   movePos: []
 --- !u!212 &322117728
 SpriteRenderer:
@@ -301,6 +304,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &322117731
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322117726}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.53, y: 0.83}
+    newSize: {x: 1.53, y: 0.83}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.53, y: 0.83}
+  m_EdgeRadius: 0
 --- !u!1 &344909968
 GameObject:
   m_ObjectHideFlags: 0
