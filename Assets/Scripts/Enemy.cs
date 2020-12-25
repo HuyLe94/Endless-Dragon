@@ -29,6 +29,10 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (transform.position.y >11)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void FixedUpdate()
@@ -50,8 +54,11 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Hitted");
-        combat.takeDmg(ref enemyHP, ref player.GetComponent<Player>().playerDmg, ref enemyShield);
-        Destroy(collision.gameObject);
+        if(collision.CompareTag("PlayerBullet"))
+        {
+            combat.takeDmg(ref enemyHP, ref player.GetComponent<Player>().playerDmg, ref enemyShield);
+            Destroy(collision.gameObject);
+        }
+        
     }
 }

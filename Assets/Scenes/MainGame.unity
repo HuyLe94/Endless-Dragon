@@ -163,8 +163,8 @@ MonoBehaviour:
   - {fileID: 1877657783273138758, guid: 736b46673057e8641a111d2199366c6b, type: 3}
   - {fileID: 4005232865707031731, guid: eca710d2e88de504e817d20287c083b7, type: 3}
   pos: []
-  speed: 1
-  timebtwSpawn: 2
+  speed: 2
+  timebtwSpawn: 3
   spawnAllow: 1
   mobPerWave: 10
 --- !u!4 &10535747
@@ -410,8 +410,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   testINT: 0
-  playerDmg: 10
-  playerHP: 100
+  playerDmg: 0
+  playerHP: 1000000
   maxHP: 100
   shield: 0
   maxShield: 30
@@ -531,7 +531,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 601482046}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -5.06, z: 0}
+  m_LocalPosition: {x: 0.04, y: -5.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -619,7 +619,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771330972}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08, y: 2.15, z: -20.479195}
+  m_LocalPosition: {x: 0.08, y: 11.42, z: -20.479195}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

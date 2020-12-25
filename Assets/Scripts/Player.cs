@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
     public int testINT = 0;
-    public int playerDmg = 10;
-    public int playerHP = 100;
+    public int playerDmg = 0;
+    public int playerHP = 10000;
     public int maxHP = 100;
     public int shield = 0;
     public int maxShield = 30;
@@ -143,6 +143,12 @@ public class Player : MonoBehaviour
             switchEffect(collision.GetComponent<OrbTypes>().type);
             Destroy(collision.gameObject);
             Array.Clear(loot, 0, loot.Length);
+        }
+
+        else if (collision.CompareTag("BossBullet"))
+        {
+            combat.takeDmg(ref playerHP, ref collision.transform.parent.GetComponent<BossSpray>().bossDMG, ref shield);
+            Destroy(collision.gameObject);
         }
     }
 

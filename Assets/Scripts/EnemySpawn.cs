@@ -37,9 +37,10 @@ public class EnemySpawn : MonoBehaviour
     public void newPos()
     {
         pos = new Vector3[10];
-        for(int i = 0;i< pos.Length;i++)
+        for(int i = 0;i< pos.Length -1;i++)
         {
             pos[i] = new Vector3(Mathf.Round(Random.Range(-5f,5f)), Mathf.Round(Random.Range(0.5f, 6f)),0);
+            pos[9] = new Vector3(Mathf.Round(Random.Range(-6f, 7f)), 12, 0);
         }
     }
     IEnumerator Spawn()
@@ -49,9 +50,11 @@ public class EnemySpawn : MonoBehaviour
         {
             int i = Random.Range(0, Mobs.Length);
             newPos();
+            int b = Random.Range(-4, 5);
             for (int x = 0; x < mobPerWave; x++)
             {
-                a[x] = Instantiate(Mobs[i], transform.position, Quaternion.identity);
+                
+                a[x] = Instantiate(Mobs[i],new Vector2(b,transform.position.y), Quaternion.identity);
                 yield return new WaitForSeconds(1);
             }
             i = Random.Range(0, Mobs.Length);
