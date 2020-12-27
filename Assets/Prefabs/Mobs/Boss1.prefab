@@ -103,8 +103,9 @@ MonoBehaviour:
   numberOfShot: 6
   bossSpeed: 1
   bossShield: 0
+  allowMove: 0
   BulletSpeed: 5
-  fireRate: 1
+  fireRate: 5
   newPos: {x: 0, y: 0}
 --- !u!50 &7729092308895343813
 Rigidbody2D:

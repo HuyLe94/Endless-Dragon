@@ -162,9 +162,13 @@ MonoBehaviour:
   - {fileID: 1128413826453390235, guid: 018d74cd5be21e4408355b5a3eb53c0e, type: 3}
   - {fileID: 1877657783273138758, guid: 736b46673057e8641a111d2199366c6b, type: 3}
   - {fileID: 4005232865707031731, guid: eca710d2e88de504e817d20287c083b7, type: 3}
+  Bosses:
+  - {fileID: 7729092308895343817, guid: 4ca8bb6afa93ffd4c80241807ec77de3, type: 3}
   pos: []
   speed: 2
   timebtwSpawn: 3
+  waveCount: 0
+  enemyDeath: 0
   spawnAllow: 1
   mobPerWave: 10
 --- !u!4 &10535747

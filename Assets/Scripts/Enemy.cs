@@ -61,4 +61,9 @@ public class Enemy : MonoBehaviour
         }
         
     }
+
+    private void OnDestroy()
+    {
+        GameObject.Find("EnemySpawner").GetComponent<EnemySpawn>().enemyDeath += 1;
+    }
 }

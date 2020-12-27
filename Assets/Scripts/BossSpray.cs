@@ -13,6 +13,7 @@ public class BossSpray : MonoBehaviour
     private float angle;
     public float bossSpeed;
     public int bossShield=0;
+    public bool allowMove = false;
     public float BulletSpeed;
     private Transform player;
     public float fireRate;
@@ -21,28 +22,33 @@ public class BossSpray : MonoBehaviour
     void Start()
     {
         combat = new Combat();
+        
         angle = Mathf.PI / -(numberOfShot + 1);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        InvokeRepeating("shoot", 1, fireRate);
+        InvokeRepeating("shoot", 2, fireRate);
         Pos();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(bossHP <=0)
+        //transform.position = Vector2.MoveTowards(transform.position, new Vector2(0f, 5.5f), 5);
+        if (bossHP <=0)
         {
             Destroy(gameObject);
+            
         }
     }
 
     private void FixedUpdate()
     {
-       move();
-       if(Mathf.Abs(Vector2.Distance(transform.position,newPos)) <= 0.1f)
-       {
-           Pos();
-       }
+        if(allowMove == true)
+        {
+            move();
+            {
+                Pos();
+            }
+        }
     }
 
     void shoot()
@@ -75,5 +81,11 @@ public class BossSpray : MonoBehaviour
             Destroy(collision.gameObject);
         }
         
+    }
+
+    private void OnDestroy()
+    {
+        GameObject.Find("EnemySpawner").GetComponent<EnemySpawn>().enabled = true;
+        GameObject.Find("EnemySpawner").GetComponent<EnemySpawn>().spawnAllow = true;
     }
 }
