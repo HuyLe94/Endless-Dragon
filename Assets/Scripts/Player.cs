@@ -7,6 +7,7 @@ using System;
 public class Player : MonoBehaviour
 {
     // Start is called before the first frame update
+    public Transform bulletHolder;
     public int testINT = 0;
     public int playerDmg = 0;
     public int playerHP = 10000;
@@ -92,7 +93,7 @@ public class Player : MonoBehaviour
     {
         if (collision.CompareTag("Bullet"))
         {
-            combat.takeDmg(ref playerHP, ref collision.transform.parent.GetComponent<Enemy>().enemyDmg, ref shield);
+            combat.takeDmg(ref playerHP, ref collision.GetComponent<AutoDestroy>().damage, ref shield);
             if (lightning == true)
             {
                 Destroy(collision.transform.parent.gameObject);
@@ -284,7 +285,7 @@ public class Player : MonoBehaviour
     {
         if (Time.time >= atkRate && allowAtk == true)
         {
-            Instantiate(bulletPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity);//.transform.SetParent(gameObject.transform);
+            Instantiate(bulletPrefab, new Vector2(transform.position.x, transform.position.y + 1), Quaternion.identity).transform.SetParent(bulletHolder);//.transform.SetParent(gameObject.transform);
             atkRate = atkRate + (1 / atkSpeed);
         }
         else

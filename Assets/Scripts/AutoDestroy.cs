@@ -5,6 +5,8 @@ using UnityEngine;
 public class AutoDestroy : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameObject parent;
+    public int damage;
     void Start()
     {
         

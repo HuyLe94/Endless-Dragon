@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
+    public Coroutine normalMob;
     public Transform Spawner;
     public GameObject[] Mobs;
     public GameObject[] Bosses;
@@ -15,18 +16,20 @@ public class EnemySpawn : MonoBehaviour
     public int enemyDeath=0;
     public bool spawnAllow = true;
     //public bool bossTime = false;
+    [SerializeField]
     private GameObject[] a;
     [SerializeField]
     private int mobPerWave = 10;
     void Start()
     {
-        a = new GameObject[mobPerWave];
-        StartCoroutine(Spawn());
+        
+         
 
     }
     private void OnEnable()
     {
-        //StartCoroutine(Spawn());
+        a = new GameObject[mobPerWave];
+        normalMob = StartCoroutine(Spawn());
     }
 
     // Update is called once per frame
@@ -34,7 +37,7 @@ public class EnemySpawn : MonoBehaviour
     {
         if (waveCount == 10 )//&& enemyDeath == 100)
         {
-            spawnAllow = false;
+            StopCoroutine(normalMob);
             if(enemyDeath == 100)
             {
                 //bossTime = true;
