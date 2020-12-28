@@ -148,7 +148,7 @@ public class Player : MonoBehaviour
 
         else if (collision.CompareTag("BossBullet"))
         {
-            combat.takeDmg(ref playerHP, ref collision.transform.parent.GetComponent<BossSpray>().bossDMG, ref shield);
+            combat.takeDmg(ref playerHP, ref collision.GetComponent<AutoDestroy>().damage, ref shield);
             Destroy(collision.gameObject);
         }
     }

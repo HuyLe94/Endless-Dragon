@@ -5,6 +5,7 @@ public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
     private Transform parent;
+    private float bulletSpeed;
     public int enemyDmg = 1;
     public int enemyHP = 10;
     public int enemyShield = 0;
@@ -28,7 +29,7 @@ public class Enemy : MonoBehaviour
     {
         if (enemyHP <= 0)
         {
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemySpawn>().enemyDeath += 1;
+            
             Destroy(gameObject);
         }
         if (transform.position.y >11)
@@ -49,9 +50,10 @@ public class Enemy : MonoBehaviour
 
     void fire()
     {
+        bulletSpeed = Random.Range(4f,7f);
         GameObject a = Instantiate(bullet, new Vector2(gameObject.transform.position.x, gameObject.transform.position.y), Quaternion.identity);
         a.transform.SetParent(parent);
-        a.GetComponent<Rigidbody2D>().velocity = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y);
+        a.GetComponent<Rigidbody2D>().velocity = new Vector2(0,-bulletSpeed);
         a.GetComponent<AutoDestroy>().parent = gameObject;
         a.GetComponent<AutoDestroy>().damage = enemyDmg;
     }
@@ -68,6 +70,6 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<EnemySpawn>().enemyDeath += 1;
     }
 }
