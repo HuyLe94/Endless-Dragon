@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
         combat = new Combat();
         parent = GameObject.Find("BulletsHolder").GetComponent<Transform>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        enemyDmg = 1*combat.EnemyStatMultiplierl;
+        enemyHP = 10 * combat.EnemyStatMultiplierl;
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(0, 0), 1 * Time.deltaTime);
     }
 

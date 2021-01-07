@@ -7,6 +7,7 @@ public class Combat
     //public Combat combat;
 
     public int EnemyStatMultiplierl = 1;
+    public int PlayerStatMultiplier = 1;
     public void takeDmg(ref int hp, ref int dmg, ref int shield)
     {
         if(shield >= dmg)

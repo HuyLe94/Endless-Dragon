@@ -27,6 +27,8 @@ public class BossSpray : MonoBehaviour
     {
         bulletHolder = GameObject.Find("BulletsHolder").GetComponent<Transform>();
         combat = new Combat();
+        bossHP = 500 * combat.EnemyStatMultiplierl;
+        bossDMG = 10 * combat.EnemyStatMultiplierl;
         shootPattern = Random.Range(1, 3);
         switch(shootPattern)
         {

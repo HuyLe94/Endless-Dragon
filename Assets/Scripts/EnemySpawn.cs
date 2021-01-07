@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawn : MonoBehaviour
 {
+    private Combat combat;
     public Coroutine normalMob;
     public Transform Spawner;
     public GameObject[] Mobs;
@@ -91,6 +92,7 @@ public class EnemySpawn : MonoBehaviour
         Instantiate(Bosses[a], transform.position,Quaternion.identity);
         enemyDeath = 0;
         waveCount = 0;
+        combat.EnemyStatMultiplierl++;
     }
 
     
